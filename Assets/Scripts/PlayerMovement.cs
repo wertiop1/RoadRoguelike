@@ -1,13 +1,15 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour, ISpeedProvider
 {
     [Header("Speed")]
     public float acceleration = 50f;
     public float turnSpeed = 20f;
     public float breakSpeed = 50f;
-    public float speedLimit = 10f;
+    public float speedLimit = 10f;    
+    public float currentSpeed;
+    public float CurrentSpeed => currentSpeed;
 
     [Header("Lane Check")]
     public Transform laneCheck;
@@ -76,5 +78,6 @@ public class PlayerMovement : MonoBehaviour
             }
             else rb.linearVelocity = rb.linearVelocity.magnitude * (Vector2)transform.up;
         }
+        currentSpeed = rb.linearVelocity.magnitude;
     }
 }
