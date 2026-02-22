@@ -1,11 +1,13 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour, ISpeedProvider
 {
     [Header("Speed")]
     public float acceleration = 2f;
     public float breakSpeed = 4f;
+    public float currentSpeed;
+    public float CurrentSpeed => currentSpeed;
 
     [Header("Gas")]
     //public float gas = 100f;
@@ -54,6 +56,7 @@ public class PlayerMovement : MonoBehaviour
         } else {
             isBreaking = false;
         }
+        
 
 
 
@@ -68,5 +71,6 @@ public class PlayerMovement : MonoBehaviour
             rb.linearVelocity = Vector2.zero;
             rb.angularVelocity = 0f;
         }
+        currentSpeed = rb.linearVelocity.magnitude;
     }
 }
